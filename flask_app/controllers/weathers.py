@@ -6,7 +6,7 @@ from flask_app.models.city import City
 
 @app.route('/', methods=['GET', 'POST'])
 def weather():
-    API_KEY = '54c5ec3d756e540708b4953060cef57c'
+    API_KEY = ''
     api_url = 'https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&appid={api_key}'
     
     # print(weather_data)
