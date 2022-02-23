@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Weather Tracker</title>
+</head>
+<body>
+    <section class="app-header">
+        <div class="text-center">
+            <h1 class="bg-info font-monospace p-5">Track Weather in Your Favorite Cities</h1>
+        </div>
+    </section>
+
+    {% with messages=get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+            <div class="d-flex justify-content-center">
+                <div class="warning-cont">
+                    <i class="error-icon bi bi-patch-exclamation-fill"></i>
+                    <p class="error-text">{{ messages[0] }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages=get_flashed_messages(category_filter=["delete-success"]) %}
+        {% if messages %}
+            <div class="d-flex justify-content-center">
+                <div class="warning-cont">
+                    <i class="success-icon bi bi-check-square-fill"></i>
+                    <p class="success-text">{{ messages[0] }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages=get_flashed_messages(category_filter=["duplicate-error"]) %}
+        {% if messages %}
+            <div class="d-flex justify-content-center">
+                <div class="warning-cont">
+                    <i class="warning-icon bi bi-patch-exclamation-fill"></i>
+                    <p class="warning-text">{{ messages[0] }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="add-place">
+        <div class="container p-4">
+            <form method="post" class="d-flex justify-content-center">
+                <input type="text" name="city_name" placeholder="City Name" class="form-control">
+                <button type="submit" class="btn btn-primary">Add City</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="tracked-places p-4">
+        <div class="container">
+            {% for data in weather_data %}
+                <div class="row">
+                    <div class="col d-flex justify-content-center p-3">
+                        <div class="left-cont border bg-light">
+                            <img src="https://openweathermap.org/img/wn/{{data['icon']}}@2x.png" alt="weather icon">
+                        </div>
+                        <div class="right-cont border bg-light">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="ps-2 pe-2">{{data['name']}}</h4>
+                                <a href="/delete/{{data['id']}}/{{data['name']}}"><i class="delete-icon bi bi-trash3-fill pe-2"></i></a>
+                            </div>
+                            <p class="mb-0 ps-2 pe-2">{{data['description']|title}}</p>
+                            <p class="mb-0 ps-2 pe-2">Temp: {{data['temp']}}  <span class="feels-like">Feels Like: {{data['feels_like']}}</span></p>
+                            <p class="mb-0 ps-2 pe-2">Temp Min: {{data['temp_min']}} Temp Max: {{data['temp_max']}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,58 @@
+.form-control {
+    width: 300px;
+}
+
+.right-cont {
+    min-width: 300px;
+}
+
+.feels-like {
+    color: rgb(20, 234, 253);
+    font-style: italic;
+}
+
+.error-icon {
+    color: red;
+    font-size: 26px;
+    padding: 15px 5px;
+}
+
+.error-text {
+    color: red;
+    font-size: 19px;
+    padding: 20px 0;
+}
+
+.delete-icon {
+    font-size: 20px;
+    color: red;
+}
+
+.warning-cont {
+    height: 50px;
+    display: flex;
+}
+
+.success-icon {
+    color: green;
+    font-size: 26px;
+    padding: 15px 5px;
+}
+
+.success-text {
+    color: green;
+    font-size: 19px;
+    padding: 20px 0;
+}
+
+.warning-icon {
+    color: rgb(255,191,0);
+    font-size: 26px;
+    padding: 15px 5px;
+}
+
+.warning-text {
+    color: rgb(255,191,0);
+    font-size: 19px;
+    padding: 20px 0;
+}
